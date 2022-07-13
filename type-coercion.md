@@ -2,7 +2,7 @@ Type coercion
 ================
 Naomi Ekas
 
--   `c(1, 1L, "C")`
+-   `c(1, 1L, "C")` all will come as characters
 
 ``` r
 c(1, 1L, "C")
@@ -40,6 +40,8 @@ c(1L / 0, "A")
 
     ## [1] "Inf" "A"
 
+character
+
 ``` r
 typeof(1L)
 ```
@@ -68,7 +70,7 @@ typeof("A")
 #typeof(c(1L / 0, "A"))
 ```
 
--   `c(1:3, 5)`
+-   `c(1:3, 5)` will come out as a double
 
 ``` r
 c(1:3, 5)
@@ -92,7 +94,7 @@ typeof(5)
 #typeof(c(1:3, 5))
 ```
 
--   `c(3, "3+")`
+-   `c(3, "3+")` character
 
 ``` r
 c(3, "3+")
@@ -116,7 +118,7 @@ typeof("3+")
 #typeof(c(3, "3+"))
 ```
 
--   `c(NA, TRUE)`
+-   `c(NA, TRUE)` nothing
 
 ``` r
 c(NA, TRUE)
