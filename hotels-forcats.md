@@ -5,6 +5,7 @@ Naomi Ekas
 ``` r
 library(tidyverse)
 library(skimr)
+library(scales)
 ```
 
 ``` r
@@ -27,6 +28,7 @@ inspiration and help.
 
 ``` r
 hotels %>%
+  mutate(arrival_date_month = fct_relevel(arrival_date_month, month.name)) %>%
   group_by(hotel, arrival_date_month) %>%   # group by hotel type and arrival month
   summarize(mean_adr = mean(adr)) %>%       # calculate mean adr for each group
   ggplot(aes(
@@ -41,7 +43,8 @@ hotels %>%
        y = "Mean ADR (average daily rate)",
        title = "Comparison of resort and city hotel prices across months",
        subtitle = "Resort hotel prices soar in the summer while city hotel prices remain relatively constant throughout the year",
-       color = "Hotel type")
+       color = "Hotel type") +
+  scale_y_continuous(labels = label_dollar())
 ```
 
     ## `summarise()` has grouped output by 'hotel'. You can override using the

@@ -7,6 +7,7 @@ output: github_document
 ```{r load-pkg, message = FALSE}
 library(tidyverse)
 library(skimr)
+library(scales)
 ```
 
 ```{r load-data, message = FALSE}
@@ -25,6 +26,7 @@ You will want to use a function from the **scales** package, see <https://scales
 
 ```{r plot, fig.width=10}
 hotels %>%
+  mutate(arrival_date_month = fct_relevel(arrival_date_month, month.name)) %>%
   group_by(hotel, arrival_date_month) %>%   # group by hotel type and arrival month
   summarize(mean_adr = mean(adr)) %>%       # calculate mean adr for each group
   ggplot(aes(
@@ -39,5 +41,6 @@ hotels %>%
        y = "Mean ADR (average daily rate)",
        title = "Comparison of resort and city hotel prices across months",
        subtitle = "Resort hotel prices soar in the summer while city hotel prices remain relatively constant throughout the year",
-       color = "Hotel type")
+       color = "Hotel type") +
+  scale_y_continuous(labels = label_dollar())
 ```
